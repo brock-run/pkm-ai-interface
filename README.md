@@ -1,6 +1,6 @@
 # pkm-ai-interface
 
-This repository contains a proof-of-concept proxy for Roam Research built around the `roam-research-mcp` package.
+This repository contains a proof-of-concept "Roam MCP Proxy" that lets a Custom GPT securely read from and write to a shared Roam Research graph. It provides infrastructure, Lambda container code, and documentation for deploying the proxy and managing access.
 
 ## Development
 
@@ -13,3 +13,13 @@ This repository contains a proof-of-concept proxy for Roam Research built around
    ```
    docker run --rm -p 9000:8080 roam-mcp-proxy
    ```
+   
+## Project Structure   
+```
+/infra  - infrastructure-as-code
+/src    - Lambda application source
+/tests  - test suites
+/docs   - project documentation
+```
+
+The long-term goal is a production-ready proxy with full observability and analytics of all calls.
