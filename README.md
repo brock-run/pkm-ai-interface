@@ -2,7 +2,6 @@
 
 This repository contains a proof-of-concept "Roam MCP Proxy" that lets a Custom GPT securely read from and write to a shared Roam Research graph. It provides infrastructure, Lambda container code, and documentation for deploying the proxy and managing access.
 
-
 ## Development
 
 1. Install dependencies:
@@ -54,8 +53,6 @@ See [`docs/SECRET_RETRIEVAL.md`](docs/SECRET_RETRIEVAL.md) for information about
    It fetches the schema from the container and writes a trimmed version to
    `docs/openapi_trim.json` containing only the endpoints required by the Custom GPT.
 
-## Testing
-
 Run the script manually and verify that `docs/openapi_trim.json` is created.
 For an automated check, run:
 ```bash
@@ -63,3 +60,31 @@ pytest -k generate_openapi
 ```
 
 The long-term goal is a production-ready proxy with full observability and analytics of all calls.
+
+## AWS Lambda Application
+
+This repository contains a minimal AWS Lambda application used as a proof of concept for the Roam MCP proxy. The function exposes an `/analytics/log` endpoint that records structured events to Amazon Kinesis Firehose.
+
+The Lambda expects the environment variable `FIREHOSE_STREAM_NAME` to be set to the name of the delivery stream. Requests should include a valid Cognito `sub` claim which is used as the `user_id` for analytics.
+
+```
+POST /analytics/log
+{
+  "action": "test"
+}
+```
+
+A `timestamp` is added server-side and the record is forwarded to Firehose.
+
+
+## TODO
+
+Unit tests currently stub the Firehose client. Future work includes:
+
+- Add integration tests against a real Firehose endpoint or moto-based mock.
+- Expand IAM policies and Terraform to support production deployment.
+- Remove dummy credentials and use environment-specific configuration.
+
+=======
+
+
