@@ -1,0 +1,40 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Roam MCP API",
+    "version": "0.3"
+  },
+  "paths": {
+    "/roam_process_batch_actions": {
+      "post": {
+        "summary": "Process Roam batch actions",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/roam_fetch_page_by_title": {
+      "get": {
+        "summary": "Fetch Roam page by title",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/analytics/log": {
+      "post": {
+        "summary": "Log analytics events",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": null
+}
