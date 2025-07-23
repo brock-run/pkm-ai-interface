@@ -4,6 +4,25 @@ This repository contains a proof-of-concept "Roam MCP Proxy" that lets a Custom 
 
 ## Development
 
+
+   
+### Project Structure   
+```
+/infra  - infrastructure-as-code
+/src    - Lambda application source
+/tests  - test suites
+/docs   - project documentation
+```
+
+### Configuration
+
+Copy `.env.example` to `.env` and provide the values for the variables below:
+
+- `ROAM_API_BASE` – Base URL of your deployed MCP proxy
+- `ROAM_API_TOKEN` – API token used for Authorization header
+
+### Execution
+
 1. Install dependencies:
    ```bash
    python -m pip install -r requirements.txt
@@ -30,13 +49,13 @@ This repository contains a proof-of-concept "Roam MCP Proxy" that lets a Custom 
    ```
    
 See [`docs/SECRET_RETRIEVAL.md`](docs/SECRET_RETRIEVAL.md) for information about the secret loader utility.
-   
-## Project Structure   
-```
-/infra  - infrastructure-as-code
-/src    - Lambda application source
-/tests  - test suites
-/docs   - project documentation
+
+### Running smoke tests
+
+The `tests/smoke/test_fetch_and_append.py` test issues a simple create-and-fetch workflow against a deployed proxy. Export the base URL of your deployment as `ROAM_API_BASE` (or load it from a `.env` file) and run:
+
+```bash
+pytest tests/smoke/test_fetch_and_append.py -k prod
 ```
 
 ## OpenAPI schema generation
@@ -84,7 +103,4 @@ Unit tests currently stub the Firehose client. Future work includes:
 - Add integration tests against a real Firehose endpoint or moto-based mock.
 - Expand IAM policies and Terraform to support production deployment.
 - Remove dummy credentials and use environment-specific configuration.
-
-=======
-
 
