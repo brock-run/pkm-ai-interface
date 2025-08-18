@@ -78,6 +78,8 @@ For an automated check, run:
 pytest -k generate_openapi
 ```
 
+See [`docs/OPENAPI_SPEC.md`](docs/OPENAPI_SPEC.md) for an overview of the trimming approach and a description of the included endpoints.
+
 The long-term goal is a production-ready proxy with full observability and analytics of all calls.
 
 ## AWS Lambda Application
