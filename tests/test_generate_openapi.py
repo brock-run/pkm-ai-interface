@@ -1,13 +1,10 @@
+import http.server
 import json
 import os
-import subprocess
-import tempfile
-import http.server
 import socketserver
+import subprocess
 import threading
 from pathlib import Path
-
-import pytest
 
 
 def run_server(tmpdir):

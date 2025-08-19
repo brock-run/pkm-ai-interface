@@ -2,8 +2,24 @@
 
 This repository contains a proof-of-concept "Roam MCP Proxy" that lets a Custom GPT securely read from and write to a shared Roam Research graph. It provides infrastructure, Lambda container code, and documentation for deploying the proxy and managing access.
 
-## Development
+![Architecture diagram](docs/architecture.svg)
 
+See [docs/architecture.md](docs/architecture.md) for a detailed overview of the components and deployment steps.
+
+## Deployment
+
+1. Build the Lambda container image:
+   ```bash
+   docker build -t roam-mcp-proxy ./src
+   ```
+2. Provision AWS resources with Terraform:
+   ```bash
+   cd infra
+   terraform init
+   terraform apply
+   ```
+
+## Development
 
    
 ### Project Structure   
@@ -21,7 +37,7 @@ Copy `.env.example` to `.env` and provide the values for the variables below:
 - `ROAM_API_BASE` – Base URL of your deployed MCP proxy
 - `ROAM_API_TOKEN` – API token used for Authorization header
 
-### Execution
+### Local development
 
 1. Install dependencies:
    ```bash
@@ -81,6 +97,14 @@ pytest -k generate_openapi
 See [`docs/OPENAPI_SPEC.md`](docs/OPENAPI_SPEC.md) for an overview of the trimming approach and a description of the included endpoints.
 
 The long-term goal is a production-ready proxy with full observability and analytics of all calls.
+
+## Creating a Custom GPT
+
+1. In ChatGPT, open **Explore GPTs** and choose **Create**.
+2. Upload `docs/openapi_trim.json` when configuring Actions.
+3. Set the base URL to your deployed API Gateway URL (`ROAM_API_BASE`).
+4. Under Authentication, add the header `Authorization: Bearer <ROAM_API_TOKEN>`.
+5. Share the GPT only with the two whitelisted users.
 
 ## AWS Lambda Application
 

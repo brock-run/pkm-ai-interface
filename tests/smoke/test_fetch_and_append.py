@@ -44,4 +44,3 @@ def test_fetch_and_append() -> None:
     data = page.json()
     assert data["title"] == title
     assert any(child["string"] == "hello world" for child in data.get("children", []))
-

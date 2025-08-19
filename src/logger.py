@@ -1,5 +1,6 @@
 import json
 import os
+
 import boto3
 
 firehose_client = boto3.client(

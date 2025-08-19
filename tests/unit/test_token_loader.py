@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import json
+import sys
+from pathlib import Path
 
 import boto3
 from moto import mock_aws
-from pathlib import Path
-import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import pytest
