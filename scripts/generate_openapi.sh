@@ -22,6 +22,7 @@ jq '{
   paths: {
     "/roam_process_batch_actions": .paths["/roam_process_batch_actions"],
     "/roam_fetch_page_by_title": .paths["/roam_fetch_page_by_title"],
+    "/roam_search_blocks": .paths["/roam_search_blocks"],
     "/analytics/log": .paths["/analytics/log"]
   },
   components: .components

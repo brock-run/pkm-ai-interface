@@ -3,3 +3,4 @@ moto
 pytest
 ruff
 black
+requests

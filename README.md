@@ -108,7 +108,7 @@ The long-term goal is a production-ready proxy with full observability and analy
 
 ## AWS Lambda Application
 
-This repository contains a minimal AWS Lambda application used as a proof of concept for the Roam MCP proxy. The function exposes an `/analytics/log` endpoint that records structured events to Amazon Kinesis Firehose.
+This repository contains a minimal AWS Lambda application used as a proof of concept for the Roam MCP proxy. In addition to an `/analytics/log` endpoint that records structured events to Amazon Kinesis Firehose, the function proxies requests under `/roam_*` to the `roam-research-mcp` server. This enables the GPT to read pages, search blocks, and append content within the Roam graph.
 
 The Lambda expects the environment variable `FIREHOSE_STREAM_NAME` to be set to the name of the delivery stream. Requests should include a valid Cognito `sub` claim which is used as the `user_id` for analytics.
 

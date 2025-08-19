@@ -51,5 +51,6 @@ def test_generate_openapi(tmp_path):
     assert set(trimmed["paths"].keys()) == {
         "/roam_process_batch_actions",
         "/roam_fetch_page_by_title",
+        "/roam_search_blocks",
         "/analytics/log",
     }

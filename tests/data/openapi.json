@@ -4,6 +4,7 @@
   "paths": {
     "/roam_process_batch_actions": {"post": {}},
     "/roam_fetch_page_by_title": {"get": {}},
+    "/roam_search_blocks": {"get": {}},
     "/analytics/log": {"post": {}},
     "/extra/endpoint": {"get": {}}
   },

@@ -18,6 +18,7 @@ The script downloads the full OpenAPI document, filters it down to the required 
 |------|--------|-------------|
 | `/roam_process_batch_actions` | `POST` | Apply a batch of write operations to the Roam graph. |
 | `/roam_fetch_page_by_title` | `GET`  | Retrieve a page by its title. |
+| `/roam_search_blocks` | `GET` | Search blocks matching a query string. |
 | `/analytics/log`            | `POST` | Record an analytics event. |
 
 See `openapi_trim.json` for the machine-readable schema.
