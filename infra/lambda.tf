@@ -6,6 +6,11 @@ resource "aws_lambda_function" "this" {
   filename      = "lambda_function_payload.zip"
   memory_size   = 128
   timeout       = 15
+  environment {
+    variables = {
+      FIREHOSE_STREAM_NAME = aws_kinesis_firehose_delivery_stream.analytics.name
+    }
+  }
 }
 
 resource "aws_lambda_permission" "apigw" {
