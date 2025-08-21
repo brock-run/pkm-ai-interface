@@ -4,8 +4,6 @@ import importlib
 import sys
 from pathlib import Path
 
-import pytest
-
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from src import token_loader
@@ -23,6 +21,7 @@ def test_import_fetches_token_from_secret(monkeypatch):
 
     monkeypatch.setattr(token_loader, "load", fake_load)
     import src.handler as handler
+
     importlib.reload(handler)
 
     assert handler.ROAM_API_TOKEN == "abc123"
@@ -41,6 +40,7 @@ def test_import_handles_missing_secret(monkeypatch):
 
     monkeypatch.setattr(token_loader, "load", fake_load)
     import src.handler as handler
+
     importlib.reload(handler)
 
     assert handler.ROAM_API_TOKEN is None

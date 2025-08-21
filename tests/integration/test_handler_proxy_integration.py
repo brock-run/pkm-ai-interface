@@ -1,7 +1,6 @@
 """Integration tests for the handler proxy behaviour."""
 
 import json
-import os
 import threading
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
