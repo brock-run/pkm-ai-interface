@@ -3,11 +3,19 @@ output "lambda_function_arn" {
 }
 
 output "api_gateway_id" {
-  value = aws_api_gateway_rest_api.this.id
+  value = aws_apigatewayv2_api.this.id
 }
 
 output "cognito_user_pool_id" {
   value = aws_cognito_user_pool.this.id
+}
+
+output "cognito_user_pool_client_id" {
+  value = aws_cognito_user_pool_client.this.id
+}
+
+output "api_domain_name" {
+  value = aws_apigatewayv2_domain_name.this.domain_name
 }
 
 output "iam_role_arn" {

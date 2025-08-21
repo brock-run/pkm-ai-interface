@@ -8,9 +8,20 @@ from typing import Any, Dict
 import requests
 
 from .logger import log_event
+from . import token_loader
 
 ROAM_API_BASE = os.environ.get("ROAM_API_BASE", "http://0.0.0.0:8088")
 ROAM_API_TOKEN = os.environ.get("ROAM_API_TOKEN")
+_SECRET_NAME = os.environ.get("ROAM_API_SECRET_NAME")
+
+# Fetch the token from Secrets Manager if a secret name is provided and no token
+# was supplied directly via the ``ROAM_API_TOKEN`` environment variable.
+if _SECRET_NAME and not ROAM_API_TOKEN:
+    try:
+        secret_payload = token_loader.load(_SECRET_NAME)
+        ROAM_API_TOKEN = secret_payload.get("token")
+    except token_loader.TokenLoaderError:
+        ROAM_API_TOKEN = None
 
 
 def _proxy_to_roam(event: Dict[str, Any], path: str, method: str) -> Dict[str, Any]:
