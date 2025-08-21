@@ -21,8 +21,17 @@ See [docs/architecture.md](docs/architecture.md) for a detailed overview of the 
 
 ## Development
 
-   
-### Project Structure   
+
+### Coding standards
+
+This project targets **Python 3.12** and uses **Ruff** for linting and **Black** for
+formatting. All API errors follow [RFC 7807](https://www.rfc-editor.org/rfc/rfc7807)
+problem details and unexpected exceptions are logged for observability. Each error
+response includes a correlation identifier that is also emitted in logs to aid in
+troubleshooting.
+
+
+### Project Structure
 ```
 /infra  - infrastructure-as-code
 /src    - Lambda application source
@@ -39,7 +48,7 @@ Copy `.env.example` to `.env` and provide the values for the variables below:
 
 ### Local development
 
-1. Install dependencies:
+1. Install dependencies (requires Python 3.12):
    ```bash
    python -m pip install -r requirements.txt
    ```

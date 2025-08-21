@@ -19,4 +19,3 @@ def test_transformer_enriches_event():
     out = json.loads(base64.b64decode(record["data"]).decode())
     assert out["action"] == "test"
     assert "processed_at" in out
-
