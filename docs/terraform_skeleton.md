@@ -4,8 +4,11 @@
 - Define IAM role and policy allowing Lambda to assume role, write CloudWatch logs, and read Secrets Manager.
 - Configure Lambda function with 128 MB memory and 15‑second timeout.
 - Expose the Lambda through API Gateway using a proxy resource and AWS_PROXY integration.
+- Create a Kinesis Firehose delivery stream that invokes the `analytics_transformer`
+  Lambda to enrich events before writing to S3.
 - Provide a minimal Cognito user pool for authentication scaffolding.
-- Supply variables and outputs to parameterize and surface core resource identifiers.
+- Supply variables and outputs to parameterize core identifiers such as
+  `ROAM_API_SECRET_NAME` and `FIREHOSE_STREAM_NAME`.
 
 ## Verified
 - IAM policy includes `secretsmanager:GetSecretValue` and CloudWatch Logs permissions.
