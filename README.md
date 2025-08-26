@@ -2,8 +2,6 @@
 
 This repository contains a proof-of-concept "Roam MCP Proxy" that lets a Custom GPT securely read from and write to a shared Roam Research graph. It provides infrastructure, Lambda container code, and documentation for deploying the proxy and managing access.
 
-![Architecture diagram](docs/architecture.svg)
-
 See [docs/architecture.md](docs/architecture.md) for a detailed overview of the components and deployment steps.
 
 ## Deployment
@@ -45,6 +43,9 @@ Copy `.env.example` to `.env` and provide the values for the variables below:
 
 - `ROAM_API_BASE` – Base URL of your deployed MCP proxy
 - `ROAM_API_TOKEN` – API token used for Authorization header
+- `ROAM_API_SECRET_NAME` – (optional) name of the AWS Secrets Manager secret
+  containing JSON `{"token":"<value>"}`; used when `ROAM_API_TOKEN` is not set
+- `FIREHOSE_STREAM_NAME` – Kinesis Firehose delivery stream for analytics events
 
 ### Local development
 
@@ -129,6 +130,8 @@ POST /analytics/log
 ```
 
 A `timestamp` is added server-side and the record is forwarded to Firehose.
+The `analytics_transformer` Lambda, invoked by Firehose, appends a processing
+timestamp before the event is persisted to S3.
 
 
 ## TODO
