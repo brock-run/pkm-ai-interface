@@ -1,0 +1,11 @@
+graph TD
+    GPT["Custom GPT"] -->|HTTPS| APIGW["API Gateway (private URL)"]
+    APIGW -->|Lambda| Lambda["Lambda roam-mcp-proxy"]
+    Lambda -->|HTTPS| Roam["Roam Graph API"]
+    Lambda -->|Logs & Metrics| CloudWatch["CloudWatch"]
+    Lambda -->|JSON events| Firehose["Kinesis Firehose"]
+    Firehose -->|Lambda transform| Transformer["Lambda analytics_transformer"]
+    Transformer --> S3["S3 Bucket Bronze"]
+    S3 --> Lakehouse["Lakehouse Ingestion (Dagster)"]
+    Cognito["Amazon Cognito User Pool"] --> APIGW
+    Secrets["AWS Secrets Manager"] --> Lambda

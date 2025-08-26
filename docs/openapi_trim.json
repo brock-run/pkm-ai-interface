@@ -1,0 +1,22 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Roam MCP API",
+    "version": "0.3"
+  },
+  "paths": {
+    "/roam_process_batch_actions": {
+      "post": {}
+    },
+    "/roam_fetch_page_by_title": {
+      "get": {}
+    },
+    "/roam_search_blocks": {
+      "get": {}
+    },
+    "/analytics/log": {
+      "post": {}
+    }
+  },
+  "components": null
+}

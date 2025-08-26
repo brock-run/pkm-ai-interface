@@ -1,0 +1,8 @@
+boto3
+moto
+pytest
+ruff
+black
+requests
+bandit
+pytest-benchmark
