@@ -53,12 +53,19 @@ resource "aws_iam_role_policy_attachment" "firehose_s3" {
   policy_arn = aws_iam_policy.firehose_s3.arn
 }
 
+data "archive_file" "analytics_transformer" {
+  type        = "zip"
+  source_file = "${path.module}/../src/analytics_transformer.py"
+  output_path = "${path.module}/analytics_transformer_payload.zip"
+}
+
 resource "aws_lambda_function" "analytics_transformer" {
-  function_name = "analytics-transformer"
-  handler       = "analytics_transformer.lambda_handler"
-  runtime       = var.lambda_runtime
-  role          = aws_iam_role.lambda_exec.arn
-  filename      = "analytics_transformer_payload.zip"
+  function_name    = "analytics-transformer"
+  handler          = "analytics_transformer.lambda_handler"
+  runtime          = var.lambda_runtime
+  role             = aws_iam_role.lambda_exec.arn
+  filename         = data.archive_file.analytics_transformer.output_path
+  source_code_hash = data.archive_file.analytics_transformer.output_base64sha256
 }
 
 resource "aws_lambda_permission" "allow_firehose" {

@@ -64,3 +64,9 @@ variable "route53_zone_id" {
   type        = string
   default     = "Z1234567890ABC"
 }
+
+variable "lambda_runtime" {
+  description = "Lambda runtime for analytics transformer"
+  type        = string
+  default     = "python3.12"
+}

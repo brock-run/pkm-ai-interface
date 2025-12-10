@@ -4,18 +4,37 @@ This repository contains a proof-of-concept "Roam MCP Proxy" that lets a Custom 
 
 See [docs/architecture.md](docs/architecture.md) for a detailed overview of the components and deployment steps.
 
-## Deployment
+## 🚀 Quick Start Deployment
 
-1. Build the Lambda container image:
+**For complete step-by-step instructions, see [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)**
+
+### Prerequisites
+- AWS CLI configured
+- Docker installed
+- Terraform installed
+- Your Roam API token
+
+### Quick Deploy (3 steps)
+
+1. **Create Roam API secret:**
    ```bash
-   docker build -t roam-mcp-proxy ./src
+   ./scripts/create_roam_secret.sh "YOUR_ROAM_TOKEN" us-east-1 roam/prod/apiToken
    ```
-2. Provision AWS resources with Terraform:
+
+2. **Build and push container image:**
+   ```bash
+   ./scripts/build_and_push_ecr.sh us-east-1 roam-mcp-proxy
+   ```
+
+3. **Deploy infrastructure:**
    ```bash
    cd infra
    terraform init
+   # Create terraform.tfvars with lambda_image_uri and roam_api_secret_name
    terraform apply
    ```
+
+See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for detailed instructions, troubleshooting, and post-deployment setup.
 
 ## Development
 
